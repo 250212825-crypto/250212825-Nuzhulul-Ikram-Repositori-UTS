@@ -1,0 +1,1059 @@
+/* ============================================================
+   styles.css — Portflio Nuzhulul Ikram
+   -Variabel & Reset
+   -Navbar
+   -Hero Section
+   -About Me
+   -Skills
+   -Services
+   -Projects / Carousel
+   -Contact
+   -Footer
+   -Komponen (Toast, Form Validation, Hamburger)
+   -Mobile Responsive (max-width: 768px)
+============================================================ */
+
+
+/* ===== 1. VARIABEL & RESET ===== */
+:root {
+    /* Font */
+    --font-heading : 'Space Grotesk', sans-serif;
+    --font-body    : 'Inter', sans-serif;
+
+    /* Warnas */
+    --color-bg-primary    : #252734;
+    --color-bg-secondary  : #2e3147;
+    --color-bg-card       : #3a3d52;
+    --color-accent        : #ff914d;
+    --color-accent-hover  : #ffb380;
+    --color-text-primary  : #ffffff;
+    --color-text-muted    : #a0a3b1;
+
+    /* Spacing */
+    --space-sm  : 8px;
+    --space-md  : 16px;
+    --space-lg  : 32px;
+    --space-xl  : 64px;
+    --space-xxl : 96px;
+}
+
+/* Reset dasar: hilangkan margin, padding, dan pakai border-box */
+* {
+    margin     : 0;
+    padding    : 0;
+    box-sizing : border-box;
+}
+
+body {
+    font-family      : var(--font-body);
+    background-color : var(--color-bg-primary);
+    color            : var(--color-text-primary);
+}
+
+/* Semua heading pakai font heading */
+h1, h2, h3, h4, h5, h6 {
+    font-family : var(--font-heading);
+}
+
+/* ===== SCROLL REVEAL ANIMATION =====
+   Elemen dengan class .reveal dimulai transparan dan sedikit ke bawah.
+   Saat JS menmbahkan .visible, elemen fade-in ke posisi normal. */
+.reveal {
+    opacity   : 0;
+    transform : translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity   : 1;
+    transform : translateY(0);
+}
+
+
+/* ===== 2. NAVBAR ===== */
+
+/* Wrapper fixed: navbar selalu menempel di atas layar */
+.nav-wrapper {
+    position   : fixed;
+    top        : 0;
+    left       : 0;
+    width      : 100%;
+    z-index    : 999;
+    transition : background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Saat sudah di-scroll, navbar mendapat background gelap */
+.nav-wrapper.scrolled .main-nav {
+    background-color : var(--color-bg-primary);
+    box-shadow       : 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Sembunyikan garis & area oranye saat sudah scroll */
+.nav-wrapper.scrolled .main-nav::before,
+.nav-wrapper.scrolled .main-nav::after {
+    opacity : 0;
+}
+
+/* Container navbar: logo kiri, menu kanan */
+.main-nav {
+    position        : absolute;
+    width           : 100%;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    padding         : var(--space-md) var(--space-lg);
+}
+
+/* Garis glow oranye sebagai pembatas kiri area oranye */
+.main-nav::before {
+    content          : '';
+    position         : absolute;
+    top              : 0;
+    left             : 60%;
+    width            : 4px;
+    height           : 100%;
+    background-color : var(--color-accent);
+    box-shadow       : 0 0 40px 10px rgba(255, 145, 77, 0.6);
+    z-index          : 1;
+    opacity          : 0;
+    transition       : opacity 0.3s ease;
+}
+
+/* Area oranye solid di 40% kanan navbar */
+.main-nav::after {
+    content          : '';
+    position         : absolute;
+    top              : 0;
+    left             : calc(60% + 4px);
+    right            : 0;
+    height           : 100%;
+    background-color : var(--color-accent);
+    z-index          : 0;
+    opacity          : 0;
+    transition       : opacity 0.3s ease;
+}
+
+/* Logo dan nav list harus di atas pseudo-element (z-index lebih tinggi) */
+.nav-logo,
+.my-nav-list {
+    position : relative;
+    z-index  : 2;
+}
+
+/* Style logo teks */
+.nav-logo {
+    text-decoration : none;
+    font-family     : var(--font-heading);
+    font-size       : 20px;
+    font-weight     : 700;
+    color           : var(--color-text-primary);
+}
+
+/* Huruf "ikram" diberi warna oranye */
+.nav-logo span {
+    color : var(--color-accent);
+}
+
+/* Daftar menu navigasi */
+.my-nav-list {
+    display    : flex;
+    gap        : var(--space-lg);
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+.my-nav-link {
+    color           : var(--color-text-primary);
+    text-decoration : none;
+    font-size       : 14px;
+    font-weight     : 800;
+    transition      : color 0.3s ease;
+}
+
+.my-nav-link:hover {
+    color : var(--color-text-muted);
+}
+
+
+/* ===== 3. HERO SECTION ===== */
+
+/* Layout dua kolom: teks (60%) + gambar (40%) */
+header {
+    display     : flex;
+    flex-wrap   : wrap;
+    align-items : stretch;
+    position    : relative;
+    min-height  : 520px;
+    padding-top : 80px; /* beri ruang untuk navbar fixed */
+}
+
+/* Garis glow oranye vertikal pemisah teks dan gambar */
+header::before {
+    content          : '';
+    position         : absolute;
+    top              : 0;
+    left             : 60%;
+    width            : 4px;
+    height           : 100%;
+    background-color : var(--color-accent);
+    box-shadow       : 0 0 40px 10px rgba(255, 145, 77, 0.6);
+    z-index          : 1;
+}
+
+/* Kolom kiri: teks hero */
+.hero-text {
+    flex           : 1 1 60%;
+    padding        : var(--space-xxl) var(--space-lg);
+    display        : flex;
+    flex-direction : column;
+}
+
+.hero-text h1 {
+    font-size     : 44px;
+    font-weight   : 700;
+    line-height   : 1.3;
+    margin-bottom : var(--space-sm);
+}
+
+/* Efek gradient teks untuk kata "Hello" */
+.text-gradient {
+    background              : linear-gradient(90deg, #FFFFFFCC, var(--color-accent));
+    -webkit-background-clip : text;
+    background-clip         : text;
+    -webkit-text-fill-color : transparent;
+    color                   : transparent;
+}
+
+.hero-text p {
+    font-size     : 16px;
+    color         : var(--color-text-muted);
+    margin-top    : var(--space-sm);
+    margin-bottom : var(--space-lg);
+}
+
+/* Teks role (hasil typing animation) diberi warna oranye */
+.hero-text p span {
+    color       : var(--color-accent);
+    font-weight : 600;
+}
+
+/* Kursor berkedip untuk efek mesin ketik */
+.typing-cursor {
+    display     : inline-block;
+    font-weight : 400;
+    animation   : blink 0.7s step-end infinite;
+    color       : inherit;
+    margin-left : 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity : 1; }
+    50%       { opacity : 0; }
+}
+
+/* Tombol "Let's Talk!" */
+.hero-button {
+    margin-bottom : var(--space-lg);
+}
+
+.hero-btn {
+    display          : inline-block;
+    padding          : 14px 32px;
+    background-color : var(--color-accent);
+    color            : #ffffff;
+    text-decoration  : none;
+    border-radius    : 8px;
+    font-weight      : 600;
+    box-shadow       : 0 8px 20px rgba(255, 145, 77, 0.3);
+    transition       : background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-btn:hover {
+    background-color : var(--color-accent-hover);
+    transform        : translateY(-2px);
+}
+
+/* Baris ikon sosial media + link CV */
+.social-icons {
+    display     : flex;
+    align-items : center;
+    gap         : var(--space-md);
+}
+
+/* Ikon sosmed berbentuk lingkaran */
+.social-icons a:not(:last-child) {
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    width            : 36px;
+    height           : 36px;
+    border-radius    : 50%;
+    background-color : rgba(255, 255, 255, 0.1);
+    color            : var(--color-text-primary);
+    font-size        : 16px;
+    text-decoration  : none;
+    transition       : background-color 0.3s ease;
+}
+
+.social-icons a:not(:last-child):hover {
+    background-color : var(--color-accent);
+    color            : #ffffff;
+}
+
+/* Link "Download CV" */
+.social-icons a:last-child {
+    color           : var(--color-accent);
+    font-size       : 14px;
+    font-weight     : 600;
+    text-decoration : none;
+    margin-left     : var(--space-sm);
+}
+
+.social-icons a:last-child:hover {
+    text-decoration : underline;
+}
+
+/* Kolom kanan: gambar avatar */
+.hero-image {
+    flex             : 1 1 40%;
+    position         : relative;
+    overflow         : hidden;
+    align-self       : stretch;
+    background-color : var(--color-accent);
+    margin-top       : -80px;  /* naik agar menutupi area navbar */
+    padding-top      : 80px;   /* kompensasi agar konten tidak tertutup */
+}
+
+/* Avatar diposisikan di pojok kanan bawah kolom */
+.hero-image img {
+    max-width  : 82%;
+    position   : absolute;
+    bottom     : 0;
+    right      : 8%;
+    height     : auto;
+    width      : auto;
+    object-fit : contain;
+    max-height : 100%;
+}
+
+
+/* ===== 4. ABOUT ME SECTION ===== */
+.about-me {
+    padding          : var(--space-xxl) var(--space-lg);
+    background-color : var(--color-bg-card);
+}
+
+/* Header section: label, judul, headline */
+.section-header {
+    max-width     : 700px;
+    margin-bottom : var(--space-xl) !important;
+}
+
+.section-label {
+    color          : var(--color-accent);
+    font-size      : 14px;
+    font-weight    : 600;
+    letter-spacing : 0.05em;
+    text-transform : uppercase;
+    margin-bottom  : var(--space-sm);
+}
+
+.section-title {
+    font-size     : 36px;
+    font-weight   : 700;
+    margin-bottom : var(--space-md);
+}
+
+.section-headline {
+    font-size   : 18px;
+    color       : var(--color-text-muted);
+    line-height : 1.6;
+}
+
+.about-content {
+    max-width : 700px;
+}
+
+.about-content p {
+    font-size     : 16px;
+    color         : var(--color-text-muted);
+    line-height   : 1.8;
+    margin-bottom : var(--space-md);
+}
+
+/* Kata kunci fokus diberi warna oranye */
+.about-content strong {
+    color       : var(--color-accent);
+    font-weight : 600;
+}
+
+
+/* ===== 5. SKILLS SECTION ===== */
+.skills-section {
+    padding          : var(--space-xxl) var(--space-lg);
+    background-color : var(--color-bg-primary);
+}
+
+.skills-section .section-label {
+    display       : block;
+    margin-bottom : var(--space-sm);
+}
+
+.skills-section .section-title {
+    margin-bottom : var(--space-xl);
+}
+
+/* Grid ikon tools: 6 kolom di desktop */
+.skills-list {
+    list-style            : none;
+    display               : grid;
+    grid-template-columns : repeat(6, 1fr);
+    gap                   : var(--space-lg) var(--space-md);
+    max-width             : 700px;
+    margin                : 0 auto;
+}
+
+/* Setiap item ikon: vertikal center */
+.skills-item {
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+    gap             : var(--space-sm);
+    padding         : var(--space-md);
+    transition      : transform 0.2s ease;
+}
+
+.skills-item:hover {
+    transform : translateY(-4px);
+}
+
+/* Ikon diubah jadi putih dengan filter, agak transparan */
+.skills-item img {
+    width      : 56px;
+    height     : 56px;
+    object-fit : contain;
+    filter     : brightness(0) invert(1);
+    opacity    : 0.7;
+    transition : opacity 0.2s ease;
+}
+
+/* Saat hover: ikon jadi oranye */
+.skills-item:hover img {
+    opacity : 1;
+    filter  : brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(340deg);
+}
+
+.skills-item span {
+    font-size   : 13px;
+    color       : var(--color-text-primary);
+    text-align  : center;
+    font-weight : 500;
+}
+
+
+/* ===== 6. SERVICES SECTION ===== */
+.services-section {
+    padding          : var(--space-xxl) var(--space-lg);
+    background-color : var(--color-bg-secondary);
+    text-align       : center;
+}
+
+/* Grid 3 kolom untuk card layanan */
+.services-grid {
+    display               : grid;
+    grid-template-columns : repeat(3, 1fr);
+    gap                   : var(--space-lg);
+    max-width             : 900px;
+    margin                : 0 auto;
+}
+
+/* Card layanan */
+.service-card {
+    background-color : var(--color-bg-card);
+    border-radius    : 16px;
+    padding          : var(--space-xl) var(--space-lg);
+    display          : flex;
+    flex-direction   : column;
+    align-items      : center;
+    gap              : var(--space-md);
+    transition       : transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card naik saat di-hover */
+.service-card:hover {
+    transform  : translateY(-10px);
+    box-shadow : 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Lingkaran warna di belakang ikon —
+   warna diambil dari CSS variable --icon-color (di-set inline per card) */
+.service-icon-wrap {
+    width            : 72px;
+    height           : 72px;
+    border-radius    : 50%;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    background-color : color-mix(in srgb, var(--icon-color) 20%, transparent);
+    margin-bottom    : var(--space-sm);
+}
+
+.service-icon-wrap i {
+    font-size : 32px;
+    color     : var(--icon-color);
+}
+
+.service-title {
+    font-size   : 20px;
+    font-weight : 700;
+    color       : var(--color-text-primary);
+}
+
+.service-desc {
+    font-size   : 14px;
+    color       : var(--color-text-muted);
+    line-height : 1.7;
+    text-align  : center;
+}
+
+
+/* ===== 7. PROJECTS / CAROUSEL ===== */
+.project-section {
+    padding          : var(--space-xxl) var(--space-lg);
+    background-color : var(--color-bg-primary);
+    overflow         : hidden; /* sembunyikan card di luar jendela */
+}
+
+/* Flex: tombol prev — track — tombol next sejajar */
+.carousel-wrapper {
+    display     : flex;
+    align-items : center;
+    gap         : var(--space-md);
+    max-width   : 1000px;
+    margin      : 0 auto;
+}
+
+/* Tombol prev / next berbentuk lingkaran */
+.carousel-btn {
+    flex-shrink      : 0;
+    width            : 44px;
+    height           : 44px;
+    border-radius    : 50%;
+    border           : 2px solid var(--color-accent);
+    background-color : transparent;
+    color            : var(--color-accent);
+    font-size        : 18px;
+    cursor           : pointer;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    transition       : background-color 0.3s ease, color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color : var(--color-accent);
+    color            : #ffffff;
+}
+
+/* Tombol di ujung (disabled) jadi transparan */
+.carousel-btn:disabled {
+    opacity : 0.3;
+    cursor  : not-allowed;
+}
+
+.carousel-btn:disabled:hover {
+    background-color : transparent;
+    color            : var(--color-accent);
+}
+
+/* Jendela tampil: menyembunyikan card di luar area */
+.carousel-track-outer {
+    flex     : 1;
+    overflow : hidden;
+}
+
+/* Track: container semua card yang bergerak horizontal */
+.carousel-track {
+    display    : flex;
+    gap        : 24px;
+    transition : transform 0.4s ease; /* animasi geser smooth */
+}
+
+/* Setiap card: 1/3 lebar track dikurangi total gap */
+.project-card {
+    flex             : 0 0 calc((100% - 48px) / 3); /* 48px = 2 gap × 24px */
+    background-color : var(--color-bg-card);
+    border-radius    : 12px;
+    overflow         : hidden;
+    transition       : transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform  : translateY(-6px);
+    box-shadow : 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Area gambar card */
+.project-img-wrap {
+    position : relative;
+    overflow : hidden;
+    height   : 180px;
+}
+
+.project-img-wrap img {
+    width      : 100%;
+    height     : 100%;
+    object-fit : cover;
+    transition : transform 0.4s ease; /* zoom saat hover */
+}
+
+.project-card:hover .project-img-wrap img {
+    transform : scale(1.06);
+}
+
+/* Overlay gelap + tombol link muncul saat hover */
+.project-overlay {
+    position         : absolute;
+    inset            : 0; /* shorthand untuk top/right/bottom/left: 0 */
+    background-color : rgba(0, 0, 0, 0.5);
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    opacity          : 0;
+    transition       : opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity : 1;
+}
+
+/* Tombol panah di tengah overlay */
+.project-link {
+    width            : 44px;
+    height           : 44px;
+    border-radius    : 50%;
+    background-color : var(--color-accent);
+    color            : #ffffff;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    font-size        : 20px;
+    text-decoration  : none;
+    transition       : transform 0.2s ease;
+}
+
+.project-link:hover {
+    transform : scale(1.1);
+}
+
+/* Info di bawah gambar card */
+.project-info {
+    padding        : var(--space-md);
+    display        : flex;
+    flex-direction : column;
+    gap            : 6px;
+}
+
+.project-stack {
+    font-size      : 12px;
+    font-weight    : 600;
+    color          : var(--color-accent);
+    letter-spacing : 0.05em;
+    text-transform : uppercase;
+}
+
+.project-title {
+    font-size   : 16px;
+    font-weight : 700;
+    color       : var(--color-text-primary);
+}
+
+.project-desc {
+    font-size   : 13px;
+    color       : var(--color-text-muted);
+    line-height : 1.6;
+}
+
+/* Dot indicator di bawah carousel */
+.carousel-dots {
+    display         : flex;
+    justify-content : center;
+    gap             : 8px;
+    margin-top      : var(--space-lg);
+}
+
+.dot {
+    width            : 8px;
+    height           : 8px;
+    border-radius    : 50%;
+    border           : none;
+    background-color : var(--color-text-muted);
+    cursor           : pointer;
+    transition       : background-color 0.3s ease, width 0.3s ease;
+    padding          : 0;
+}
+
+/* Dot aktif melebar jadi pill oranye */
+.dot.active {
+    background-color : var(--color-accent);
+    width            : 24px;
+    border-radius    : 4px;
+}
+
+
+/* ===== 8. CONTACT SECTION ===== */
+.contact-section {
+    padding          : var(--space-xxl) var(--space-lg);
+    background-color : var(--color-bg-primary);
+    margin-top       : var(--space-xl);
+}
+
+/* Override Bootstrap form-control → tema gelap */
+.contact-input.form-control {
+    background-color : var(--color-bg-primary);
+    border           : 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius    : 8px;
+    color            : var(--color-text-primary);
+    font-size        : 14px;
+}
+
+.contact-input.form-control::placeholder {
+    color : var(--color-text-muted);
+}
+
+/* Fokus: glow oranye, bukan biru default Bootstrap */
+.contact-input.form-control:focus {
+    background-color : var(--color-bg-primary);
+    border-color     : var(--color-accent);
+    box-shadow       : 0 0 0 3px rgba(255, 145, 77, 0.15);
+    color            : var(--color-text-primary);
+}
+
+/* Override Bootstrap button → oranye */
+.contact-btn.btn {
+    background-color : var(--color-accent);
+    border           : none;
+    border-radius    : 8px;
+    color            : #ffffff;
+    font-weight      : 600;
+    padding          : 14px 32px;
+    box-shadow       : 0 8px 20px rgba(255, 145, 77, 0.3);
+    transition       : background-color 0.3s ease, transform 0.2s ease;
+    display          : inline-flex;
+    align-items      : center;
+    gap              : 8px;
+}
+
+.contact-btn.btn:hover {
+    background-color : var(--color-accent-hover);
+    color            : #ffffff;
+    transform        : translateY(-2px);
+}
+
+/* Ikon sosmed di section contact */
+.contact-social-link {
+    color           : var(--color-text-muted) !important;
+    font-size       : 28px !important;
+    text-decoration : none;
+    transition      : color 0.3s ease, transform 0.2s ease;
+    line-height     : 1;
+}
+
+.contact-social-link:hover {
+    color     : var(--color-accent) !important;
+    transform : translateY(-3px);
+}
+
+
+/* ===== 9. FOOTER ===== */
+.footer {
+    background-color : var(--color-bg-secondary);
+    padding          : var(--space-xl) var(--space-lg) var(--space-lg);
+}
+
+.footer-container {
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    max-width       : 900px;
+    margin          : 0 auto;
+    gap             : var(--space-lg);
+    flex-wrap       : wrap;
+}
+
+.footer-tagline {
+    font-size : 13px;
+    color     : var(--color-text-muted);
+}
+
+.footer-copy {
+    text-align : center;
+    font-size  : 12px;
+    color      : var(--color-text-muted);
+}
+
+
+/* ===== 10. KOMPONEN ===== */
+
+/* --- Form Validation: border merah saat input salah --- */
+.input-error {
+    border-color : #ff4d4d !important;
+    box-shadow   : 0 0 0 3px rgba(255, 77, 77, 0.15) !important;
+}
+
+/* --- Toast Notification: muncul di tengah atas layar --- */
+.toast-success {
+    position         : fixed;
+    top              : 80px;
+    left             : 50%;
+    transform        : translateX(-50%) translateY(-20px);
+    background-color : #1e1e2e;
+    color            : #ffffff;
+    border-left      : 4px solid var(--color-accent);
+    padding          : 16px 28px;
+    border-radius    : 8px;
+    font-size        : 14px;
+    font-weight      : 500;
+    box-shadow       : 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity          : 0;
+    transition       : opacity 0.4s ease, transform 0.4s ease;
+    z-index          : 9999;
+    white-space      : nowrap;
+}
+
+/* Toast muncul dengan fade + slide down */
+.toast-success.show {
+    opacity   : 1;
+    transform : translateX(-50%) translateY(0);
+}
+
+/* --- Hamburger Menu (desktop: tersembunyi) --- */
+.hamburger {
+    display         : none;
+    flex-direction  : column;
+    justify-content : space-between;
+    width           : 28px;
+    height          : 20px;
+    background      : transparent;
+    border          : none;
+    cursor          : pointer;
+    padding         : 0;
+    position        : relative;
+    z-index         : 1000;
+}
+
+/* Tiga garis hamburger */
+.hamburger span {
+    display          : block;
+    width            : 100%;
+    height           : 2px;
+    background-color : var(--color-text-primary);
+    border-radius    : 2px;
+    transition       : transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animasi ☰ → ✕ saat menu terbuka */
+.hamburger.active span:nth-child(1) {
+    transform : translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity : 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform : translateY(-9px) rotate(-45deg);
+}
+
+
+/* ===== 11. MOBILE RESPONSIVE (max-width: 768px) ===== */
+@media (max-width: 768px) {
+
+    /* --- Navbar --- */
+    .main-nav {
+        padding : 14px var(--space-md);
+    }
+
+    .nav-logo {
+        font-size : 16px;
+    }
+
+    /* Sembunyikan garis & area oranye navbar di mobile */
+    .main-nav::before,
+    .main-nav::after {
+        display : none;
+    }
+
+    /* Tampilkan tombol hamburger di mobile */
+    .hamburger {
+        display  : flex;
+        position : relative;
+        z-index  : 1000;
+    }
+
+    /* Menu fullscreen saat hamburger dibuka */
+    .my-nav-list {
+        display          : none;
+        position         : fixed;
+        top              : 0;
+        left             : 0;
+        width            : 100%;
+        height           : 100vh;
+        background-color : var(--color-accent);
+        flex-direction   : column;
+        align-items      : center;
+        justify-content  : center;
+        gap              : var(--space-xl);
+        z-index          : 998;
+        opacity          : 0;
+        transform        : translateY(-10px);
+        transition       : opacity 0.3s ease, transform 0.3s ease;
+        pointer-events   : none;
+    }
+
+    /* Kelas .open ditambahkan oleh JS saat hamburger diklik */
+    .my-nav-list.open {
+        display        : flex;
+        opacity        : 1;
+        transform      : translateY(0);
+        pointer-events : all;
+    }
+
+    /* Link menu besar dan putih di atas background oranye */
+    .my-nav-link {
+        font-size   : 28px !important;
+        font-weight : 700;
+        color       : #ffffff !important;
+    }
+
+    .my-nav-link:hover {
+        color   : var(--color-bg-primary) !important;
+        opacity : 0.8;
+    }
+
+    /* Garis hamburger jadi putih saat menu oranye terbuka */
+    .hamburger.active span {
+        background-color : #ffffff;
+    }
+
+    /* Animasi link muncul satu per satu (stagger) */
+    .my-nav-list .my-nav-item {
+        opacity   : 0;
+        transform : translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .my-nav-list.open .my-nav-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .my-nav-list.open .my-nav-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+    .my-nav-list.open .my-nav-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+    .my-nav-list.open .my-nav-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+    /* --- Hero --- */
+    header {
+        flex-direction : column;
+        padding-top    : 80px;
+        min-height     : auto;
+    }
+
+    /* Sembunyikan garis oranye vertikal di mobile */
+    header::before {
+        display : none;
+    }
+
+    .hero-text {
+        flex    : none;
+        width   : 100%;
+        padding : var(--space-lg) var(--space-md);
+    }
+
+    .hero-text h1 {
+        font-size : 32px;
+    }
+
+    /* Avatar tampil di bawah teks, bukan di samping */
+    .hero-image {
+        flex        : none;
+        width       : 100%;
+        height      : 280px;
+        margin-top  : 0;
+        padding-top : 0;
+    }
+
+    .hero-image img {
+        position  : relative;
+        bottom    : auto;
+        right     : auto;
+        max-width : 60%;
+        margin    : 0 auto;
+        display   : block;
+    }
+
+    /* --- Social Icons --- */
+    .social-icons {
+        flex-wrap : wrap;
+        gap       : var(--space-sm);
+    }
+
+    /* --- Skills: 3 kolom di mobile --- */
+    .skills-list {
+        grid-template-columns : repeat(3, 1fr) !important;
+        gap                   : var(--space-md) var(--space-sm);
+        padding               : 0 var(--space-sm);
+    }
+
+    .skills-item {
+        padding : var(--space-sm);
+    }
+
+    .skills-item img {
+        width  : 48px !important;
+        height : 48px !important;
+    }
+
+    .skills-item span {
+        font-size : 11px;
+    }
+
+    /* --- Services: 1 kolom di mobile --- */
+    .services-grid {
+        grid-template-columns : 1fr !important;
+        gap                   : var(--space-md);
+    }
+
+    .service-card {
+        padding : var(--space-md);
+    }
+
+    /* --- Carousel: 1 card di mobile --- */
+    .project-card {
+        flex : 0 0 100%;
+    }
+
+    .carousel-btn {
+        width  : 36px;
+        height : 36px;
+    }
+
+    /* --- Contact --- */
+    .contact-section .row {
+        flex-direction : column;
+    }
+
+    .contact-left,
+    .contact-right {
+        width : 100%;
+    }
+
+    .contact-left {
+        margin-bottom : var(--space-lg);
+    }
+
+    /* --- Toast mobile: lebar penuh dan teks wrap --- */
+    .toast-success {
+        width       : 90%;
+        font-size   : 13px;
+        padding     : 14px 16px;
+        white-space : normal;
+        text-align  : center;
+    }
+}

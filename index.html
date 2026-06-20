@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- UTF-8 agar karakter khusus tampil dengan benar -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Viewport meta: pastikan tampilan menyesuaikan ukuran layar device -->
+
+    <meta name="description" content="Portfolio Nuzhulul Ikram - Web Developer, UI/UX Designer, Graphic Designer">
+    <!-- Meta description untuk SEO (ditampilkan di hasil pencarian Google) -->
+
+    <title>Nuzhulul Ikram | Portfolio</title>
+
+    <!-- ===== Bootstrap CSS =====
+         Framework CSS untuk grid system dan komponen UI (form, button, dll) -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+
+    <!-- ===== Bootstrap Icons =====
+         Library ikon berbasis font dari Bootstrap -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+    <!-- ===== Google Fonts =====
+         Space Grotesk → heading | Inter → body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- ===== Custom CSS ===== -->
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+
+    <!-- ================================================
+         NAVBAR
+         Fixed di atas, transparan saat di hero,
+         berubah gelap saat scroll > 50px (diatur JS)
+    ================================================ -->
+    <div class="nav-wrapper">
+        <nav class="main-nav">
+
+            <!-- Logo / Brand -->
+            <a href="#" class="nav-logo">
+                Nuzhulul<span>ikram</span>
+                <!-- <span> untuk memberi warna oranye pada "ikram" -->
+            </a>
+
+            <!-- Daftar link navigasi -->
+            <ul class="my-nav-list">
+                <li class="my-nav-item"><a href="#"         class="my-nav-link">HOME</a></li>
+                <li class="my-nav-item"><a href="#about"    class="my-nav-link">About</a></li>
+                <li class="my-nav-item"><a href="#portfolio" class="my-nav-link">Projects</a></li>
+                <li class="my-nav-item"><a href="#contact"  class="my-nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Tombol hamburger (hanya tampil di mobile)
+                 JS akan toggle class .active dan .open pada menu -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
+    </div>
+    <!-- /navbar -->
+
+
+    <!-- ================================================
+         HERO SECTION
+         Layout dua kolom: teks (kiri 60%) + avatar (kanan 40%)
+         Dipisahkan oleh garis glow oranye vertikal (CSS ::before)
+    ================================================ -->
+    <header>
+
+        <!-- Kolom kiri: teks dan tombol aksi -->
+        <div class="hero-text">
+            <h1>
+                <span class="text-gradient">Hello</span>,
+                <!-- .text-gradient: efek warna gradient dari putih ke oranye -->
+                <br>
+                <span>I Am</span> Nuzhulul Ikram
+            </h1>
+
+            <!-- Teks role diisi oleh Typing Animation (script.js) -->
+            <p>
+                A <span id="typing-text"></span><span class="typing-cursor">|</span>
+                <!-- #typing-text: target JS untuk mengetik teks role -->
+                <!-- .typing-cursor: kursor berkedip animasi CSS -->
+                <br>
+                with 3 years of experience.
+            </p>
+
+            <!-- Tombol CTA menuju section Contact -->
+            <div class="hero-button">
+                <a href="#contact" class="hero-btn">Let's Talk!</a>
+            </div>
+
+            <!-- Ikon sosmed + link download CV -->
+            <div class="social-icons">
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://x.com" target="_blank" aria-label="Twitter / X">
+                    <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <!-- Link terakhir: Download CV (styling berbeda via CSS :last-child) -->
+                <a href="assets/cv-nuzhulul-ikram.pdf" target="_blank">
+                    Download Curriculum Vitae
+                </a>
+            </div>
+        </div>
+
+        <!-- Kolom kanan: gambar avatar dengan background oranye -->
+        <div class="hero-image">
+            <img src="assets/heroAvatar.png" alt="Foto Nuzhulul Ikram">
+        </div>
+
+    </header>
+    <!-- /hero -->
+
+
+    <!-- ================================================
+         MAIN CONTENT
+    ================================================ -->
+    <main>
+
+        <!-- ===== SECTION: About Me =====
+             .reveal → animasi fade-in saat di-scroll ke view (diatur JS) -->
+        <section class="about-me reveal" id="about">
+
+            <!-- Header section -->
+            <div class="section-header">
+                <p class="section-label">Who I Am</p>
+                <h2 class="section-title">About me!</h2>
+                <p class="section-headline">
+                    Teknologi adalah alat; dampaknya ditentukan oleh bagaimana cara kita menggunakannya.
+                </p>
+            </div>
+
+            <!-- Deskripsi singkat -->
+            <div class="about-content">
+                <p>Saya merupakan fresh graduate yang mampu bekerja secara mandiri maupun tim.</p>
+                <p>Saya terbiasa bekerja cepat, adaptif, dan mengikuti perkembangan teknologi.</p>
+                <p>
+                    Fokus utama saya adalah
+                    <strong>UI/UX Design</strong>,
+                    <strong>Graphic Design</strong>, dan
+                    <strong>Frontend Development</strong>.
+                </p>
+            </div>
+
+        </section>
+        <!-- /about -->
+
+
+        <!-- ===== SECTION: Skills & Tools ===== -->
+        <section class="skills-section reveal" id="skills">
+
+            <p class="section-label">What I Use</p>
+            <h2 class="section-title">My Skills and Tools</h2>
+
+            <!-- Grid ikon tools — loading="lazy" agar tidak dimuat sebelum di-scroll -->
+            <ul class="skills-list">
+                <li class="skills-item">
+                    <img src="assets/icons/accessibility.png" alt="Accessibility" width="64" height="64" loading="lazy">
+                    <span>Accessibility</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/premierepro.png" alt="Adobe Premiere Pro" width="64" height="64" loading="lazy">
+                    <span>Premiere Pro</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/illustrator.png" alt="Adobe Illustrator" width="64" height="64" loading="lazy">
+                    <span>Illustrator</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/bootstrap.png" alt="Bootstrap" width="64" height="64" loading="lazy">
+                    <span>Bootstrap</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/photoshop.png" alt="Adobe Photoshop" width="64" height="64" loading="lazy">
+                    <span>Photoshop</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/office.png" alt="Microsoft Office" width="64" height="64" loading="lazy">
+                    <span>Office</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/figma.png" alt="Figma" width="64" height="64" loading="lazy">
+                    <span>Figma</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/html.png" alt="HTML5" width="64" height="64" loading="lazy">
+                    <span>HTML5</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/css.png" alt="CSS3" width="64" height="64" loading="lazy">
+                    <span>CSS3</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/js.png" alt="JavaScript" width="64" height="64" loading="lazy">
+                    <span>JavaScript</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/type-script.png" alt="TypeScript" width="64" height="64" loading="lazy">
+                    <span>TypeScript</span>
+                </li>
+                <li class="skills-item">
+                    <img src="assets/icons/physics.png" alt="React" width="64" height="64" loading="lazy">
+                    <span>React</span>
+                </li>
+            </ul>
+
+        </section>
+        <!-- /skills-section -->
+
+
+        <!-- ===== SECTION: My Services =====
+             Tiga card: Graphic Designer, UI/UX Designer, Frontend Developer
+             --icon-color: CSS variable inline untuk warna ikon per card -->
+        <section class="services-section reveal" id="services">
+
+            <div class="section-header" style="text-align: center; max-width: 100%;">
+                <p class="section-label">What I Do</p>
+                <h2 class="section-title">My Services</h2>
+            </div>
+
+            <div class="services-grid">
+
+                <!-- Card 1: Graphic Designer -->
+                <article class="service-card">
+                    <div class="service-icon-wrap" style="--icon-color: #a855f7;">
+                        <i class="bi bi-palette2"></i>
+                    </div>
+                    <h3 class="service-title">Graphic Designer</h3>
+                    <p class="service-desc">
+                        Membuat desain visual, branding, poster,
+                        dan konten digital yang menarik dan komunikatif.
+                    </p>
+                </article>
+
+                <!-- Card 2: UI/UX Designer -->
+                <article class="service-card">
+                    <div class="service-icon-wrap" style="--icon-color: #3b82f6;">
+                        <i class="bi bi-layout-wtf"></i>
+                    </div>
+                    <h3 class="service-title">UI / UX Designer</h3>
+                    <p class="service-desc">
+                        Mendesain interface, wireframe, prototype,
+                        dan pengalaman pengguna yang intuitif dan estetis.
+                    </p>
+                </article>
+
+                <!-- Card 3: Frontend Developer -->
+                <article class="service-card">
+                    <div class="service-icon-wrap" style="--icon-color: #22c55e;">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <h3 class="service-title">Frontend Developer</h3>
+                    <p class="service-desc">
+                        Membangun website responsive dan interaktif
+                        menggunakan HTML, CSS, JavaScript, dan React.
+                    </p>
+                </article>
+
+            </div>
+            <!-- /services-grid -->
+
+        </section>
+        <!-- /services-section -->
+
+
+        <!-- ===== SECTION: My Projects / Portfolio =====
+             Carousel horizontal — dikendalikan oleh JS (moveCarousel) -->
+        <section class="project-section reveal" id="portfolio">
+
+            <div class="section-header" style="text-align: center; max-width: 100%;">
+                <p class="section-label">My Work</p>
+                <h2 class="section-title">Galeri Portofolio</h2>
+            </div>
+
+            <!-- Carousel: tombol prev — track — tombol next -->
+            <div class="carousel-wrapper">
+
+                <!-- Tombol Prev: geser kiri -->
+                <button class="carousel-btn prev" aria-label="Previous" onclick="moveCarousel(-1)">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <!-- Jendela tampil carousel (overflow hidden) -->
+                <div class="carousel-track-outer">
+
+                    <!-- Track bergerak horizontal via transform: translateX -->
+                    <div class="carousel-track" id="carouselTrack">
+
+                        <!-- Project Card 1 -->
+                        <article class="project-card">
+                            <div class="project-img-wrap">
+                                <img src="assets/projects/project1.png" alt="Portfolio Website" loading="lazy">
+                                <!-- Overlay muncul saat hover (CSS opacity transition) -->
+                                <div class="project-overlay">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-stack">HTML • CSS • JavaScript</span>
+                                <h3 class="project-title">Portfolio Website</h3>
+                                <p class="project-desc">Responsive portfolio website built using HTML and CSS.</p>
+                            </div>
+                        </article>
+
+                        <!-- Project Card 2 -->
+                        <article class="project-card">
+                            <div class="project-img-wrap">
+                                <img src="assets/project/project2.png" alt="UI Design" loading="lazy">
+                                <div class="project-overlay">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-stack">Figma • UI/UX</span>
+                                <h3 class="project-title">UI Design</h3>
+                                <p class="project-desc">Mobile interface design created in Figma.</p>
+                            </div>
+                        </article>
+
+                        <!-- Project Card 3 -->
+                        <article class="project-card">
+                            <div class="project-img-wrap">
+                                <img src="assets/project/project3.png" alt="Landing Page" loading="lazy">
+                                <div class="project-overlay">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-stack">HTML • CSS</span>
+                                <h3 class="project-title">Landing Page</h3>
+                                <p class="project-desc">Simple landing page with responsive layout.</p>
+                            </div>
+                        </article>
+
+                        <!-- Project Card 4 -->
+                        <article class="project-card">
+                            <div class="project-img-wrap">
+                                <img src="assets/project/project4.png" alt="Web App" loading="lazy">
+                                <div class="project-overlay">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-stack">JavaScript • API</span>
+                                <h3 class="project-title">Web App</h3>
+                                <p class="project-desc">Interactive web application with API integration.</p>
+                            </div>
+                        </article>
+
+                        <!-- Project Card 5 -->
+                        <article class="project-card">
+                            <div class="project-img-wrap">
+                                <img src="assets/project/project5.png" alt="Brand Identity" loading="lazy">
+                                <div class="project-overlay">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-stack">Illustrator • Branding</span>
+                                <h3 class="project-title">Brand Identity</h3>
+                                <p class="project-desc">Logo and brand identity design for a local business.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                    <!-- /carousel-track -->
+
+                </div>
+                <!-- /carousel-track-outer -->
+
+                <!-- Tombol Next: geser kanan -->
+                <button class="carousel-btn next" aria-label="Next" onclick="moveCarousel(1)">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+            </div>
+            <!-- /carousel-wrapper -->
+
+            <!-- Dot indicator dibuat dinamis oleh JS -->
+            <div class="carousel-dots" id="carouselDots"></div>
+
+        </section>
+        <!-- /project-section -->
+
+
+        <!-- ===== SECTION: Contact =====
+             Layout dua kolom Bootstrap: info (kiri) + form (kanan)
+             Form divalidasi oleh JS sebelum dikirim -->
+        <section class="contact-section reveal" id="contact">
+            <div class="container">
+                <div class="row align-items-start">
+
+                    <!-- Kolom kiri: info kontak -->
+                    <div class="col-md-6 contact-left">
+                        <p class="section-label">Contact</p>
+                        <h2 class="section-title">Hubungi Saya</h2>
+                        <p class="contact-desc">
+                            Jangan ragu untuk menghubungi saya kapan saja...
+                        </p>
+                        <!-- Ikon sosmed contact -->
+                        <div class="contact-socials">
+                            <a href="#" class="contact-social-link" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="#" class="contact-social-link" aria-label="GitHub">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="#" class="contact-social-link" aria-label="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kolom kanan: form kontak -->
+                    <div class="col-md-6 contact-right">
+                        <!-- .contact-form: target JS untuk validasi dan submit -->
+                        <form class="contact-form">
+                            <div class="mb-3">
+                                <!-- Input nama: wajib diisi -->
+                                <input type="text"
+                                       class="form-control contact-input"
+                                       placeholder="Nama">
+                            </div>
+                            <div class="mb-3">
+                                <!-- Input email: divalidasi format user@domain.tld -->
+                                <input type="email"
+                                       class="form-control contact-input"
+                                       placeholder="Email">
+                            </div>
+                            <div class="mb-3">
+                                <!-- Textarea pesan: wajib diisi -->
+                                <textarea class="form-control contact-input"
+                                          rows="6"
+                                          placeholder="Message"></textarea>
+                            </div>
+                            <!-- Tombol submit: JS akan cegah reload & validasi dulu -->
+                            <button type="submit" class="btn contact-btn">
+                                Send Message <i class="bi bi-send"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- /contact-section -->
+
+    </main>
+    <!-- /main -->
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">
+                © 2026 Nuzhulul Ikram · Thanks for scrolling, that's all 👋
+            </p>
+        </div>
+    </footer>
+    <!-- /footer -->
+
+
+    <!-- ===== JavaScript =====
+         Dimuat di akhir body agar DOM sudah siap saat script berjalan -->
+    <script src="script.js"></script>
+
+    <!-- Bootstrap JS Bundle (termasuk Popper untuk komponen interaktif) -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous">
+    </script>
+
+</body>
+</html>
